@@ -1,7 +1,8 @@
 package gui;
 
+import logic.Logic;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,20 +17,26 @@ public class GUI {
     private JPanel mOptionPanel;
 
     // Игровые кнопки
-    private JButton m0Button;
-    private JButton m1Button;
-    private JButton m2Button;
-    private JButton m3Button;
-    private JButton m4Button;
-    private JButton m5Button;
-    private JButton m6Button;
-    private JButton m7Button;
-    private JButton m8Button;
+    private JButton m0Button = new JButton("0");
+    private JButton m1Button = new JButton("1");
+    private JButton m2Button = new JButton("2");
+    private JButton m3Button = new JButton("3");
+    private JButton m4Button = new JButton("4");
+    private JButton m5Button = new JButton("5");
+    private JButton m6Button = new JButton("6");
+    private JButton m7Button = new JButton("7");
+    private JButton m8Button = new JButton("8");
+
+    private JButton[] mButtons = {m0Button, m1Button, m2Button, m3Button, m4Button,
+            m5Button, m6Button, m7Button, m8Button};
 
     // Инструменты управления
-    private JButton mStart;
+    private JButton mStartButton;
 
-    public void resetValueInButtons() {
+    /**
+     * Метод, очищающий надписи на кнопках
+     */
+    private void resetValueInButtons() {
         m0Button.setText("");
         m1Button.setText("");
         m2Button.setText("");
@@ -42,44 +49,23 @@ public class GUI {
     }
 
     /**
-     * Сначала придумал, но потом по-другому, оставлю на всякий случай
+     * Метод, заполняющий поля игрового поля (возможен более лучший способ, но пока так оставлю)
      *
-     * @param buttonNum - номер кнопки
-     * @param value     - значение кнопки
+     * @param fieldMap  - игровое поле
+     * @param buttons   - массив кнопок
      */
-    public void setValueInButton(int buttonNum, String value) {
-        switch (buttonNum) {
-            case 0:
-                m0Button.setText(value);
-                break;
-            case 1:
-                m1Button.setText(value);
-                break;
-            case 2:
-                m2Button.setText(value);
-                break;
-            case 3:
-                m3Button.setText(value);
-                break;
-            case 4:
-                m4Button.setText(value);
-                break;
-            case 5:
-                m5Button.setText(value);
-                break;
-            case 6:
-                m6Button.setText(value);
-                break;
-            case 7:
-                m7Button.setText(value);
-                break;
-            case 8:
-                m8Button.setText(value);
-                break;
+    private void setValueInButton(String[] fieldMap, JButton[] buttons) {
+        for (int i = 0; i < fieldMap.length; i++) {
+            if (fieldMap[i] != "") {
+                buttons[i].setText(fieldMap[i]);
+                buttons[i].setEnabled(false);
+            }
         }
     }
 
-    GUI() {
+    public GUI() {
+        Logic logic = new Logic();
+
         // Настройка окна
         mWindow = new JFrame("Крестики-Нолики");
         mWindow.setSize(1000, 600);
@@ -96,54 +82,46 @@ public class GUI {
         mGamePanel.setLayout(null);
         mWindow.add(mGamePanel);
 
-        // Инициализация и добавление кнопок на игровую панель
-        m0Button = new JButton("0");
+        // добавление и поридание свойст кнопок на игровую панель
+        //m0Button = new JButton("0");
         m0Button.setSize(200, 200);
         m0Button.setLocation(0, 0);
         m0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m0Button.setText("0");
+                m0Button.setText(logic.getSide());
             }
         });
         mGamePanel.add(m0Button);
 
-        m1Button = new JButton("1");
         m1Button.setSize(200, 200);
         m1Button.setLocation(200, 0);
         mGamePanel.add(m1Button);
 
-        m2Button = new JButton("2");
         m2Button.setSize(200, 200);
         m2Button.setLocation(400, 0);
         mGamePanel.add(m2Button);
 
-        m3Button = new JButton("3");
         m3Button.setSize(200, 200);
         m3Button.setLocation(0, 200);
         mGamePanel.add(m3Button);
 
-        m4Button = new JButton("4");
         m4Button.setSize(200, 200);
         m4Button.setLocation(200, 200);
         mGamePanel.add(m4Button);
 
-        m5Button = new JButton("5");
         m5Button.setSize(200, 200);
         m5Button.setLocation(400, 200);
         mGamePanel.add(m5Button);
 
-        m6Button = new JButton("6");
         m6Button.setSize(200, 200);
         m6Button.setLocation(0, 400);
         mGamePanel.add(m6Button);
 
-        m7Button = new JButton("7");
         m7Button.setSize(200, 200);
         m7Button.setLocation(200, 400);
         mGamePanel.add(m7Button);
 
-        m8Button = new JButton("8");
         m8Button.setSize(200, 200);
         m8Button.setLocation(400, 400);
         mGamePanel.add(m8Button);
@@ -157,9 +135,22 @@ public class GUI {
         mOptionPanel.setLayout(null);
         mWindow.add(mOptionPanel);
 
-        mStart = new JButton("Start");
-        mStart.setSize(200, 200);
-        mStart.setLocation(0, 0);
-        mOptionPanel.add(mStart);
+        mStartButton = new JButton("Start");
+        mStartButton.setSize(200, 200);
+        mStartButton.setLocation(0, 0);
+        mStartButton.setFocusPainted(false);
+        mStartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetValueInButtons();
+                logic.cleanFieldMap();
+                if (logic.getSide() == "X") {
+                    logic.turn();
+                    setValueInButton(logic.getFieldMap(), mButtons);
+                }
+            }
+        });
+        mOptionPanel.add(mStartButton);
     }
+
 }
