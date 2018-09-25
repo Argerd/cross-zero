@@ -2,27 +2,27 @@ package logic;
 
 public class Logic {
     // Сторона, за которую играет ПК
-    private String mSide = "X";
+    private String side = "X";
 
     // Поле игры
-    private String[] mFieldMap = new String[9];
+    private String[] fieldMap = new String[9];
 
     /** Счетчик ходов. */
-    private int mTurnCounter = -1;
+    private int turnCounter = -1;
 
     public String getSide() {
-        return mSide;
+        return side;
     }
 
     public String[] getFieldMap() {
-        return mFieldMap;
+        return fieldMap;
     }
 
     /** Очистка игрового поля для начала новой игры. */
     public void cleanFieldMap() {
-        for (int i = 0; i < mFieldMap.length; i++) {
-            mFieldMap[i] = "";
-            mTurnCounter = -1;
+        for (int i = 0; i < fieldMap.length; i++) {
+            fieldMap[i] = "";
+            turnCounter = -1;
         }
     }
 
@@ -34,7 +34,7 @@ public class Logic {
     private int analysisOfVictory() {
         int num = -1;
 
-        if (mSide == "X") {
+        if (side == "X") {
 
         } else {
 
@@ -44,10 +44,10 @@ public class Logic {
 
     /** Ход ПК. */
     public void turn() {
-        switch (mTurnCounter) {
+        switch (turnCounter) {
             case -1:
-                mFieldMap[4] = mSide;
-                mTurnCounter++;
+                fieldMap[4] = side;
+                turnCounter++;
                 break;
             case 0:
 
