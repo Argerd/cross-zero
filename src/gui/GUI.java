@@ -54,7 +54,7 @@ public class GUI {
      * @param fieldMap  - игровое поле
      * @param buttons   - массив кнопок
      */
-    private void setValueInButton(String[] fieldMap, JButton[] buttons) {
+    private void setValueInButtons(String[] fieldMap, JButton[] buttons) {
         for (int i = 0; i < fieldMap.length; i++) {
             if (fieldMap[i] != "") {
                 buttons[i].setText(fieldMap[i]);
@@ -63,12 +63,22 @@ public class GUI {
         }
     }
 
+    /**
+     *
+     * @param field
+     * @param button
+     */
+    private void setValueForButton(String field, JButton button) {
+        button.setText(field);
+        button.setEnabled(false);
+    }
+
     public GUI() {
         Logic logic = new Logic();
 
         // Настройка окна
         mWindow = new JFrame("Крестики-Нолики");
-        mWindow.setSize(1000, 600);
+        mWindow.setSize(1000, 800);
         mWindow.setResizable(false);
         mWindow.setVisible(true);
         mWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,7 +156,7 @@ public class GUI {
                 logic.cleanFieldMap();
                 if (logic.getSide() == "X") {
                     logic.turn();
-                    setValueInButton(logic.getFieldMap(), mButtons);
+                    setValueInButton(logic.getFieldMap()[4], m4Button);
                 }
             }
         });
