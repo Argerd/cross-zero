@@ -1,19 +1,20 @@
 package gui;
 
 import logic.Logic;
+import main.State;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI {
-    // Окно
+    /** Окно. */
     private JFrame mWindow;
 
-    // Панель, содержащее поле игры (кнопки)
+    /** Панель, на которой отображаются игровые элементы. */
     private JPanel mGamePanel;
 
-    // Панель, содержащая кнопки управления
+    /** Панель, содержащая кнопки управления. */
     private JPanel mOptionPanel;
 
     // Игровые кнопки
@@ -29,6 +30,9 @@ public class GUI {
 
     private JButton[] mButtons = {m0Button, m1Button, m2Button, m3Button, m4Button,
             m5Button, m6Button, m7Button, m8Button};
+
+    /** Условие: началась ли игра? */
+    private boolean isStarted = false;
 
     // Инструменты управления
     private JButton mStartButton;
@@ -49,17 +53,15 @@ public class GUI {
     }
 
     /**
-     * Метод, заполняющий поля игрового поля (возможен более лучший способ, но пока так оставлю)
-     *
-     * @param fieldMap  - игровое поле
-     * @param buttons   - массив кнопок
+     * Метод, возвращающий сторону игрока в зависимости от стороны ПК, для отображения на кнопке.
+     * @param side  - сторона пк.
+     * @return      - строка-сторона игрока, отоброжаемая на кнопке
      */
-    private void setValueInButtons(String[] fieldMap, JButton[] buttons) {
-        for (int i = 0; i < fieldMap.length; i++) {
-            if (fieldMap[i] != "") {
-                buttons[i].setText(fieldMap[i]);
-                buttons[i].setEnabled(false);
-            }
+    private String getSideForButton(String side) {
+        if (side == "X") {
+            return "0";
+        } else {
+            return "X";
         }
     }
 
@@ -73,7 +75,9 @@ public class GUI {
         button.setEnabled(false);
     }
 
+    /** Создание окна приложения. */
     public GUI() {
+        State state = new State();
         Logic logic = new Logic();
 
         // Настройка окна
@@ -93,47 +97,103 @@ public class GUI {
         mWindow.add(mGamePanel);
 
         // добавление и поридание свойст кнопок на игровую панель
-        //m0Button = new JButton("0");
         m0Button.setSize(200, 200);
         m0Button.setLocation(0, 0);
         m0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m0Button.setText(logic.getSide());
+                m0Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 0);
             }
         });
         mGamePanel.add(m0Button);
 
         m1Button.setSize(200, 200);
         m1Button.setLocation(200, 0);
+        m1Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m1Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 1);
+            }
+        });
         mGamePanel.add(m1Button);
 
         m2Button.setSize(200, 200);
         m2Button.setLocation(400, 0);
+        m2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m2Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 2);
+            }
+        });
         mGamePanel.add(m2Button);
 
         m3Button.setSize(200, 200);
         m3Button.setLocation(0, 200);
+        m3Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m3Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 3);
+            }
+        });
         mGamePanel.add(m3Button);
 
         m4Button.setSize(200, 200);
         m4Button.setLocation(200, 200);
+        m4Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m4Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 4);
+            }
+        });
         mGamePanel.add(m4Button);
 
         m5Button.setSize(200, 200);
         m5Button.setLocation(400, 200);
+        m5Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m5Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 5);
+            }
+        });
         mGamePanel.add(m5Button);
 
         m6Button.setSize(200, 200);
         m6Button.setLocation(0, 400);
+        m6Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m6Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 6);
+            }
+        });
         mGamePanel.add(m6Button);
 
         m7Button.setSize(200, 200);
         m7Button.setLocation(200, 400);
+        m7Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m7Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 7);
+            }
+        });
         mGamePanel.add(m7Button);
 
         m8Button.setSize(200, 200);
         m8Button.setLocation(400, 400);
+        m8Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m8Button.setText(getSideForButton(state.getSide()));
+                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 8);
+            }
+        });
         mGamePanel.add(m8Button);
 
 
@@ -153,14 +213,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetValueInButtons();
-                logic.cleanFieldMap();
-                if (logic.getSide() == "X") {
-                    logic.turn();
-                    setValueInButton(logic.getFieldMap()[4], m4Button);
-                }
             }
         });
         mOptionPanel.add(mStartButton);
     }
-
 }

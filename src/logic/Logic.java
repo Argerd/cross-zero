@@ -1,25 +1,13 @@
 package logic;
 
 public class Logic {
-    // Сторона, за которую играет ПК
-    private String side = "X";
-
-    // Поле игры
-    private String[] fieldMap = new String[9];
-
-    /** Счетчик ходов. */
-    private int turnCounter = -1;
-
-    public String getSide() {
-        return side;
-    }
-
-    public String[] getFieldMap() {
-        return fieldMap;
-    }
-
-    /** Очистка игрового поля для начала новой игры. */
-    public void cleanFieldMap() {
+    /**
+     * Очистка игрового поля для начала новой игры.
+     *
+     * @param fieldMap      - игровое поле
+     * @param turnCounter   - счетчик ходов
+     */
+    public void cleanFieldMap(String[] fieldMap, byte turnCounter) {
         for (int i = 0; i < fieldMap.length; i++) {
             fieldMap[i] = "";
             turnCounter = -1;
@@ -27,11 +15,13 @@ public class Logic {
     }
 
     /**
-     * Метод, анализирующий правильный ход для победы
+     * Метод, анализирующий правильный ход для победы.
      *
-     * @return  - номер поля, куда нужно совершить ход для ПК
+     * @param side      - сторона, за которую играет пк.
+     * @param fieldMap  - игровое поле
+     * @return          - номер поля, куда нужно совершить ход для ПК
      */
-    private int analysisOfVictory() {
+    private int analysisOfVictory(String side, String[] fieldMap) {
         int num = -1;
 
         if (side == "X") {
@@ -42,8 +32,13 @@ public class Logic {
         return num;
     }
 
-    /** Ход ПК. */
-    public void turn() {
+    /**
+     * Ход пк.
+     * @param fieldMap      - игровое поле.
+     * @param turnCounter   - счетчик ходов.
+     * @param side          - сторона, за которую играет пк.
+     */
+    public void turn(String[] fieldMap, byte turnCounter, String side) {
         switch (turnCounter) {
             case -1:
                 fieldMap[4] = side;
@@ -53,5 +48,4 @@ public class Logic {
 
         }
     }
-
 }
