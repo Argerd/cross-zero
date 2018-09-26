@@ -31,10 +31,7 @@ public class GUI {
     private JButton[] mButtons = {m0Button, m1Button, m2Button, m3Button, m4Button,
             m5Button, m6Button, m7Button, m8Button};
 
-    /** Условие: началась ли игра? */
-    private boolean isStarted = false;
-
-    // Инструменты управления
+    /** Кнопка "Start". */
     private JButton mStartButton;
 
     /**
@@ -54,8 +51,8 @@ public class GUI {
 
     /**
      * Метод, возвращающий сторону игрока в зависимости от стороны ПК, для отображения на кнопке.
-     * @param side  - сторона пк.
-     * @return      - строка-сторона игрока, отоброжаемая на кнопке
+     * @param side  сторона пк.
+     * @return      строка-сторона игрока, отоброжаемая на кнопке
      */
     private String getSideForButton(String side) {
         if (side == "X") {
@@ -67,12 +64,48 @@ public class GUI {
 
     /**
      *
-     * @param field
-     * @param button
+     * @param buttonNumber
+     * @param side
      */
-    private void setValueForButton(String field, JButton button) {
-        button.setText(field);
-        button.setEnabled(false);
+    private void setValueInButton(byte buttonNumber, String side) {
+        switch (buttonNumber) {
+            case 0:
+                m0Button.setText(side);
+                m0Button.setEnabled(false);
+                break;
+            case 1:
+                m1Button.setText(side);
+                m1Button.setEnabled(false);
+                break;
+            case 2:
+                m2Button.setText(side);
+                m2Button.setEnabled(false);
+                break;
+            case 3:
+                m3Button.setText(side);
+                m3Button.setEnabled(false);
+                break;
+            case 4:
+                m4Button.setText(side);
+                m4Button.setEnabled(false);
+                break;
+            case 5:
+                m5Button.setText(side);
+                m5Button.setEnabled(false);
+                break;
+            case 6:
+                m6Button.setText(side);
+                m6Button.setEnabled(false);
+                break;
+            case 7:
+                m7Button.setText(side);
+                m7Button.setEnabled(false);
+                break;
+            case 8:
+                m8Button.setText(side);
+                m8Button.setEnabled(false);
+                break;
+        }
     }
 
     /** Создание окна приложения. */
@@ -102,8 +135,16 @@ public class GUI {
         m0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m0Button.setText(getSideForButton(state.getSide()));
                 state.setFieldInMap(getSideForButton(state.getSide()), (byte) 0);
+                byte numberOfField = logic.analysisOfVictory(state.getSide(), state.getFieldMap(),
+                        state.getTurnCounter());
+                System.out.println(numberOfField);
+                m0Button.setText(getSideForButton(state.getSide()));
+                m0Button.setEnabled(false);
+                state.setFieldInMap(state.getSide(), numberOfField);
+                state.incTurnCounter();
+                setValueInButton(numberOfField, state.getSide());
+                System.out.println(state.getSide());
             }
         });
         mGamePanel.add(m0Button);
@@ -113,8 +154,16 @@ public class GUI {
         m1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m1Button.setText(getSideForButton(state.getSide()));
                 state.setFieldInMap(getSideForButton(state.getSide()), (byte) 1);
+                byte numberOfField = logic.analysisOfVictory(state.getSide(), state.getFieldMap(),
+                        state.getTurnCounter());
+                System.out.println(numberOfField);
+                m1Button.setText(getSideForButton(state.getSide()));
+                m1Button.setEnabled(false);
+                state.setFieldInMap(state.getSide(), numberOfField);
+                state.incTurnCounter();
+                setValueInButton(numberOfField, state.getSide());
+                System.out.println(state.getSide());;
             }
         });
         mGamePanel.add(m1Button);
@@ -213,6 +262,13 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetValueInButtons();
+                state.setStarted(true);
+                if (state.getSide() == "X") {
+                    m4Button.setText(state.getSide());
+                    m4Button.setEnabled(false);
+                    state.setFieldInMap(state.getSide(), (byte) 4);
+                    state.incTurnCounter();
+                }
             }
         });
         mOptionPanel.add(mStartButton);

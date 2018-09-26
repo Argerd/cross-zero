@@ -1,51 +1,100 @@
 package logic;
 
 public class Logic {
+    /** Вариант выигрыша при заполнении клеток 0-1-2. */
+    String[] var012 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 0-3-6. */
+    String[] var036 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 0-4-8. */
+    String[] var048 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 1-4-7. */
+    String[] var147 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 2-5-8. */
+    String[] var258 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 3-4-5. */
+    String[] var345 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 6-7-8. */
+    String[] var678 = {"", "", ""};
+    /** Вариант выигрыша при заполнении клеток 6-4-3. */
+    String[] var642 = {"", "", ""};
+
     /**
-     * Очистка игрового поля для начала новой игры.
+     * Метод, заполняющий вариант выигрыша значениями, которые уже имеются на игровом поле
      *
-     * @param fieldMap      - игровое поле
-     * @param turnCounter   - счетчик ходов
+     * @param fiedlMap  игровое поле
+     * @param fields    клетки варианта выигрыша
+     * @param nums      массив номеров клеток поля
+     * @return          вариант выигрыша с заполненными полями на данный момент
      */
-    public void cleanFieldMap(String[] fieldMap, byte turnCounter) {
-        for (int i = 0; i < fieldMap.length; i++) {
-            fieldMap[i] = "";
-            turnCounter = -1;
+    private String[] variantFromCompare(String[] fiedlMap, String[] fields, byte[] nums) {
+        for (int i = 0; i < fields.length; i++) {
+            fields[i] = fiedlMap[nums[i]];
         }
+        return fields;
     }
 
     /**
-     * Метод, анализирующий правильный ход для победы.
+     * Проверка комбинации: записаны ли в нее значения
      *
-     * @param side      - сторона, за которую играет пк.
-     * @param fieldMap  - игровое поле
-     * @return          - номер поля, куда нужно совершить ход для ПК
+     * @param variant   комбинация
+     * @return  true, если комбинация не учавствовала в игре
      */
-    private int analysisOfVictory(String side, String[] fieldMap) {
-        int num = -1;
+    private boolean checkVarIsEmpty(String[] variant) {
+        for (int i = 0; i < variant.length; i++) {
+            if (variant[i] != "") {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    /**
+     * Метод, анализирующий и выдающий правильный ход для победы.
+     *
+     * @param side      сторона, за которую играет пк.
+     * @param fieldMap  игровое поле
+     * @return          номер поля, куда нужно совершить ход для ПК
+     */
+    public byte analysisOfVictory(String side, String[] fieldMap, byte turnCounter) {
+        byte fieldForNextTurn = -1;
         if (side == "X") {
+            switch (turnCounter) {
+                case 0:
+                    var012 = variantFromCompare(fieldMap, var012, new byte[] {0, 1, 2});
+                    var036 = variantFromCompare(fieldMap, var036, new byte[] {0, 3, 6});
+                    var048 = variantFromCompare(fieldMap, var048, new byte[] {0, 4, 8});
+                    var147 = variantFromCompare(fieldMap, var147, new byte[] {1, 4, 7});
+                    var258 = variantFromCompare(fieldMap, var258, new byte[] {2, 5, 8});
+                    var345 = variantFromCompare(fieldMap, var345, new byte[] {3, 4, 5});
+                    var678 = variantFromCompare(fieldMap, var678, new byte[] {6, 7, 8});
+                    var642 = variantFromCompare(fieldMap, var642, new byte[] {6, 4, 2});
 
+                    if (checkVarIsEmpty(var012) == false) {
+                        System.out.println("false");
+                        if (var012[0] == "0") {
+                            System.out.println("kek1");
+                            fieldForNextTurn = 2;
+                        } else {
+                            if (var012[1] == "0" || var012[2] == "0") {
+                                System.out.println("kek2");
+                                fieldForNextTurn = 0;
+                            }
+                        }
+                    }
+                    return fieldForNextTurn;
+            }
         } else {
 
         }
-        return num;
+        return fieldForNextTurn;
     }
 
     /**
      * Ход пк.
-     * @param fieldMap      - игровое поле.
-     * @param turnCounter   - счетчик ходов.
-     * @param side          - сторона, за которую играет пк.
+     *
+     * @param fieildForNextTurn - номер поля, сходит ПК.
      */
-    public void turn(String[] fieldMap, byte turnCounter, String side) {
-        switch (turnCounter) {
-            case -1:
-                fieldMap[4] = side;
-                turnCounter++;
-                break;
-            case 0:
+    public void turn(byte fieildForNextTurn) {
 
-        }
     }
 }

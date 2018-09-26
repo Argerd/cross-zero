@@ -5,10 +5,21 @@ public class State {
     private String side = "X";
 
     /** Игровое поле. */
-    private String[] fieldMap = new String[9];
+    private String[] fieldMap = {"", "", "", "", "", "", "", "", ""};
 
     /** Переменная-счетчик ходов. */
     private byte turnCounter = -1;
+
+    /** Условие: началась ли игра? */
+    private boolean isStarted = false;
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
+    }
 
     public String getSide() {
         return side;
@@ -30,7 +41,17 @@ public class State {
         this.turnCounter = turnCounter;
     }
 
-    public void setFieldInMap(String field, byte num) {
-        fieldMap[num] = field;
+    public void incTurnCounter() {
+        turnCounter++;
+    }
+
+    /**
+     * Заполнить клетку поля.
+     *
+     * @param side  сторона, занявшая клетку.
+     * @param num   номер клетки.
+     */
+    public void setFieldInMap(String side, byte num) {
+        fieldMap[num] = side;
     }
 }
