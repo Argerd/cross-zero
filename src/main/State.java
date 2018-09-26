@@ -5,7 +5,7 @@ public class State {
     private String side = "X";
 
     /** Игровое поле. */
-    private String[] fieldMap = {"", "", "", "", "", "", "", "", ""};
+    private String[] fieldMap = {"-", "-", "-", "-", "-", "-", "-", "-", "-"};
 
     /** Переменная-счетчик ходов. */
     private byte turnCounter = -1;

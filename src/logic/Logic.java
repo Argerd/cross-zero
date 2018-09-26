@@ -1,5 +1,10 @@
 package logic;
 
+import gui.GUI;
+import main.State;
+
+import javax.swing.*;
+
 public class Logic {
     /** Вариант выигрыша при заполнении клеток 0-1-2. */
     String[] var012 = {"", "", ""};
@@ -49,13 +54,29 @@ public class Logic {
     }
 
     /**
+     * Метод, изменяющий игровое поле и кнопку при нажатии на неё
+     *
+     * @param state     объект State (состояния)
+     * @param button    объект кнопки
+     */
+    public byte clickOnButton(State state, JButton button) {
+        state.setFieldInMap(GUI.getSideForButton(state.getSide()), (byte) 0);
+        button.setText(GUI.getSideForButton(state.getSide()));
+        button.setEnabled(false);
+        byte numberOfFieldInMap = analysisOfVictory(state.getSide(), state.getFieldMap(), state.getTurnCounter());
+        state.setFieldInMap(state.getSide(), numberOfFieldInMap);
+        state.incTurnCounter();
+        return numberOfFieldInMap;
+    }
+
+    /**
      * Метод, анализирующий и выдающий правильный ход для победы.
      *
      * @param side      сторона, за которую играет пк.
      * @param fieldMap  игровое поле
      * @return          номер поля, куда нужно совершить ход для ПК
      */
-    public byte analysisOfVictory(String side, String[] fieldMap, byte turnCounter) {
+    private byte analysisOfVictory(String side, String[] fieldMap, byte turnCounter) {
         byte fieldForNextTurn = -1;
         if (side == "X") {
             switch (turnCounter) {

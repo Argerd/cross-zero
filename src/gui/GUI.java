@@ -8,13 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI {
-    /** Окно. */
+    /**
+     * Окно.
+     */
     private JFrame mWindow;
 
-    /** Панель, на которой отображаются игровые элементы. */
+    /**
+     * Панель, на которой отображаются игровые элементы.
+     */
     private JPanel mGamePanel;
 
-    /** Панель, содержащая кнопки управления. */
+    /**
+     * Панель, содержащая кнопки управления.
+     */
     private JPanel mOptionPanel;
 
     // Игровые кнопки
@@ -31,7 +37,9 @@ public class GUI {
     private JButton[] mButtons = {m0Button, m1Button, m2Button, m3Button, m4Button,
             m5Button, m6Button, m7Button, m8Button};
 
-    /** Кнопка "Start". */
+    /**
+     * Кнопка "Start".
+     */
     private JButton mStartButton;
 
     /**
@@ -51,10 +59,11 @@ public class GUI {
 
     /**
      * Метод, возвращающий сторону игрока в зависимости от стороны ПК, для отображения на кнопке.
-     * @param side  сторона пк.
-     * @return      строка-сторона игрока, отоброжаемая на кнопке
+     *
+     * @param side сторона пк.
+     * @return строка-сторона игрока, отоброжаемая на кнопке
      */
-    private String getSideForButton(String side) {
+    public static String getSideForButton(String side) {
         if (side == "X") {
             return "0";
         } else {
@@ -63,9 +72,10 @@ public class GUI {
     }
 
     /**
+     * Метод, устанавливающий значение стороны играющего на кнопку
      *
-     * @param buttonNumber
-     * @param side
+     * @param buttonNumber  номер кнопки
+     * @param side          сторона
      */
     private void setValueInButton(byte buttonNumber, String side) {
         switch (buttonNumber) {
@@ -108,7 +118,9 @@ public class GUI {
         }
     }
 
-    /** Создание окна приложения. */
+    /**
+     * Создание окна приложения.
+     */
     public GUI() {
         State state = new State();
         Logic logic = new Logic();
@@ -129,22 +141,13 @@ public class GUI {
         mGamePanel.setLayout(null);
         mWindow.add(mGamePanel);
 
-        // добавление и поридание свойст кнопок на игровую панель
+        // добавление и придание свойст кнопок на игровую панель
         m0Button.setSize(200, 200);
         m0Button.setLocation(0, 0);
         m0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 0);
-                byte numberOfField = logic.analysisOfVictory(state.getSide(), state.getFieldMap(),
-                        state.getTurnCounter());
-                System.out.println(numberOfField);
-                m0Button.setText(getSideForButton(state.getSide()));
-                m0Button.setEnabled(false);
-                state.setFieldInMap(state.getSide(), numberOfField);
-                state.incTurnCounter();
-                setValueInButton(numberOfField, state.getSide());
-                System.out.println(state.getSide());
+                setValueInButton(logic.clickOnButton(state, m0Button), state.getSide());
             }
         });
         mGamePanel.add(m0Button);
@@ -154,16 +157,7 @@ public class GUI {
         m1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 1);
-                byte numberOfField = logic.analysisOfVictory(state.getSide(), state.getFieldMap(),
-                        state.getTurnCounter());
-                System.out.println(numberOfField);
-                m1Button.setText(getSideForButton(state.getSide()));
-                m1Button.setEnabled(false);
-                state.setFieldInMap(state.getSide(), numberOfField);
-                state.incTurnCounter();
-                setValueInButton(numberOfField, state.getSide());
-                System.out.println(state.getSide());;
+                setValueInButton(logic.clickOnButton(state, m1Button), state.getSide());
             }
         });
         mGamePanel.add(m1Button);
