@@ -68,8 +68,8 @@ public class Logic {
      * Метод, анализирующий и выдающий правильный ход.
      *
      * @param side     сторона, за которую играет пк.
-     * @param fieldMap игровое поле
-     * @return номер поля, куда нужно совершить ход для ПК
+     * @param fieldMap игровое поле.
+     * @return номер поля, куда нужно совершить ход для ПК.
      */
     public byte analysisOfTurns(String side, String[] fieldMap, byte turnCounter) {
         byte fieldForNextTurn = -1;
@@ -84,30 +84,31 @@ public class Logic {
         if (side == "X") {
             switch (turnCounter) {
                 case 0:
-                    if (!checkVarIsEmpty(var012)) {
-                        if (var012[0] == "0") {
-                            return fieldForNextTurn = 2;
+                    if (fieldMap[0] == "0") {
+                        return fieldForNextTurn = 2;
+                    } else {
+                        if (fieldMap[1] == "0" || fieldMap[2] == "0") {
+                            return fieldForNextTurn = 0;
                         } else {
-                            if (var012[1] == "0" || var012[2] == "0") {
+                            if (fieldMap[3] == "0" || fieldMap[6] == "0") {
                                 return fieldForNextTurn = 0;
                             } else {
-                                if (var036[1] == "0" || var036[2] == "0") {
-                                    return fieldForNextTurn = 0;
-                                } else {
-                                    if (var048[2] == "0") {
-                                        return fieldForNextTurn = 6;
-                                    }
+                                if (fieldMap[8] == "0") {
+                                    return fieldForNextTurn = 6;
                                 }
                             }
                         }
                     }
-                    if (var147[2] == "0") {
+                    if (fieldMap[7] == "0") {
                         return fieldForNextTurn = 6;
                     }
-                    if (var258[1] == "0") {
+                    if (fieldMap[5] == "0") {
                         return fieldForNextTurn = 8;
                     }
                     break;
+
+                case 1:
+                    
             }
         } else {
 
@@ -118,9 +119,9 @@ public class Logic {
     /**
      * Метод, проверяющий заполнены ли поля варианта одной стороной.
      *
-     * @param var   - проверяемый вариант
-     * @return      0, если поля варианта заполнены стороной "0"; 1, если поля варианта заполенены стороной "Х";
-     *              -1, если возникла непредвиденная ошибка.
+     * @param var - проверяемый вариант.
+     * @return 0, если поля варианта заполнены стороной "0"; 1, если поля варианта заполенены стороной "Х";
+     * -1, если возникла непредвиденная ошибка.
      */
     private byte varIsFull(String[] var) {
         if (var[0] == "0" && var[1] == "0" && var[2] == "0") {
@@ -135,7 +136,8 @@ public class Logic {
 
     /**
      * Метод, проверяющий победила ли какая-то из сторон.
-     * @return  0, если победила сторона "0"; 1, если победила сторона "Х"; -1, если возникла какая-то ошибка.
+     *
+     * @return 0, если победила сторона "0"; 1, если победила сторона "Х"; -1, если возникла какая-то ошибка.
      */
     public byte isFinish() {
         if (varIsFull(var012) == 0) {
