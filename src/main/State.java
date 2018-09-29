@@ -54,4 +54,9 @@ public class State {
     public void setFieldInMap(String side, byte num) {
         fieldMap[num] = side;
     }
+
+    /** Метод, сбрасывающий значения игрового поля */
+    public void resetFieldMap() {
+        fieldMap = new String[]{"-", "-", "-", "-", "-", "-", "-", "-", "-"};
+    }
 }

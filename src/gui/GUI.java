@@ -47,14 +47,23 @@ public class GUI {
      */
     private void resetValueInButtons() {
         m0Button.setText("");
+        m0Button.setEnabled(true);
         m1Button.setText("");
+        m1Button.setEnabled(true);
         m2Button.setText("");
+        m2Button.setEnabled(true);
         m3Button.setText("");
+        m3Button.setEnabled(true);
         m4Button.setText("");
+        m4Button.setEnabled(true);
         m5Button.setText("");
+        m5Button.setEnabled(true);
         m6Button.setText("");
+        m6Button.setEnabled(true);
         m7Button.setText("");
+        m7Button.setEnabled(true);
         m8Button.setText("");
+        m8Button.setEnabled(true);
     }
 
     /**
@@ -119,6 +128,22 @@ public class GUI {
     }
 
     /**
+     * Метод, изменяющий игровое поле и кнопку при нажатии на неё
+     *
+     * @param state     объект State (состояния)
+     * @param button    объект кнопки
+     */
+    public byte clickOnButton(State state, Logic logic, JButton button, byte buttonNumber) {
+        state.setFieldInMap(GUI.getSideForButton(state.getSide()), buttonNumber);
+        button.setText(GUI.getSideForButton(state.getSide()));
+        button.setEnabled(false);
+        byte numberOfFieldInMap = logic.analysisOfTurns(state.getSide(), state.getFieldMap(), state.getTurnCounter());
+        state.setFieldInMap(state.getSide(), numberOfFieldInMap);
+        state.incTurnCounter();
+        return numberOfFieldInMap;
+    }
+
+    /**
      * Создание окна приложения.
      */
     public GUI() {
@@ -144,97 +169,100 @@ public class GUI {
         // добавление и придание свойст кнопок на игровую панель
         m0Button.setSize(200, 200);
         m0Button.setLocation(0, 0);
+        m0Button.setEnabled(false);
         m0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setValueInButton(logic.clickOnButton(state, m0Button), state.getSide());
+                setValueInButton(clickOnButton(state, logic, m0Button, (byte) 0), state.getSide());
             }
         });
         mGamePanel.add(m0Button);
 
         m1Button.setSize(200, 200);
         m1Button.setLocation(200, 0);
+        m1Button.setEnabled(false);
         m1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setValueInButton(logic.clickOnButton(state, m1Button), state.getSide());
+                setValueInButton(clickOnButton(state, logic,  m1Button, (byte) 1), state.getSide());
             }
         });
         mGamePanel.add(m1Button);
 
         m2Button.setSize(200, 200);
         m2Button.setLocation(400, 0);
+        m2Button.setEnabled(false);
         m2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m2Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 2);
+                setValueInButton(clickOnButton(state, logic, m2Button, (byte) 2), state.getSide());
             }
         });
         mGamePanel.add(m2Button);
 
         m3Button.setSize(200, 200);
         m3Button.setLocation(0, 200);
+        m3Button.setEnabled(false);
         m3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m3Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 3);
+                setValueInButton(clickOnButton(state, logic, m3Button, (byte) 3), state.getSide());
             }
         });
         mGamePanel.add(m3Button);
 
         m4Button.setSize(200, 200);
         m4Button.setLocation(200, 200);
+        m4Button.setEnabled(false);
         m4Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m4Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 4);
+
             }
         });
         mGamePanel.add(m4Button);
 
         m5Button.setSize(200, 200);
         m5Button.setLocation(400, 200);
+        m5Button.setEnabled(false);
         m5Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m5Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 5);
+                setValueInButton(clickOnButton(state, logic, m5Button, (byte) 5), state.getSide());
             }
         });
         mGamePanel.add(m5Button);
 
         m6Button.setSize(200, 200);
         m6Button.setLocation(0, 400);
+        m6Button.setEnabled(false);
         m6Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m6Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 6);
+                setValueInButton(clickOnButton(state, logic, m6Button, (byte) 6), state.getSide());
             }
         });
         mGamePanel.add(m6Button);
 
         m7Button.setSize(200, 200);
         m7Button.setLocation(200, 400);
+        m7Button.setEnabled(false);
         m7Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m7Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 7);
+                setValueInButton(clickOnButton(state, logic, m7Button, (byte) 7), state.getSide());
             }
         });
         mGamePanel.add(m7Button);
 
         m8Button.setSize(200, 200);
         m8Button.setLocation(400, 400);
+        m8Button.setEnabled(false);
         m8Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m8Button.setText(getSideForButton(state.getSide()));
-                state.setFieldInMap(getSideForButton(state.getSide()), (byte) 8);
+                setValueInButton(clickOnButton(state, logic, m8Button, (byte) 8), state.getSide());
+                System.out.println(state.getTurnCounter());
             }
         });
         mGamePanel.add(m8Button);
@@ -256,6 +284,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetValueInButtons();
+                state.resetFieldMap();
                 state.setStarted(true);
                 if (state.getSide() == "X") {
                     m4Button.setText(state.getSide());
