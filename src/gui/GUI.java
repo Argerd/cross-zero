@@ -67,6 +67,33 @@ public class GUI {
     }
 
     /**
+     * Метод, делающий все кнопки неактивными
+     */
+    private void enableFalseButtons() {
+        m0Button.setEnabled(false);
+        m1Button.setEnabled(false);
+        m2Button.setEnabled(false);
+        m3Button.setEnabled(false);
+        m4Button.setEnabled(false);
+        m5Button.setEnabled(false);
+        m6Button.setEnabled(false);
+        m7Button.setEnabled(false);
+        m8Button.setEnabled(false);
+    }
+
+    /**
+     * Метод, выводящий на экран сообщение о победителе
+     *
+     * @param side  сторона победителя
+     */
+    private void messageForWinner(String side) {
+        if (side == "0" || side == "X") {
+            enableFalseButtons();
+            JOptionPane.showMessageDialog(null, "Победила сторона: " + side);
+        }
+    }
+
+    /**
      * Метод, возвращающий сторону игрока в зависимости от стороны ПК, для отображения на кнопке.
      *
      * @param side сторона пк.
@@ -83,8 +110,8 @@ public class GUI {
     /**
      * Метод, устанавливающий значение стороны играющего на кнопку
      *
-     * @param buttonNumber  номер кнопки
-     * @param side          сторона
+     * @param buttonNumber номер кнопки
+     * @param side         сторона
      */
     private void setValueInButton(byte buttonNumber, String side) {
         switch (buttonNumber) {
@@ -130,8 +157,8 @@ public class GUI {
     /**
      * Метод, изменяющий игровое поле и кнопку при нажатии на неё
      *
-     * @param state     объект State (состояния)
-     * @param button    объект кнопки
+     * @param state  объект State (состояния)
+     * @param button объект кнопки
      */
     public byte clickOnButton(State state, Logic logic, JButton button, byte buttonNumber) {
         state.setFieldInMap(GUI.getSideForButton(state.getSide()), buttonNumber);
@@ -174,6 +201,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m0Button, (byte) 0), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m0Button);
@@ -184,7 +212,8 @@ public class GUI {
         m1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setValueInButton(clickOnButton(state, logic,  m1Button, (byte) 1), state.getSide());
+                setValueInButton(clickOnButton(state, logic, m1Button, (byte) 1), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m1Button);
@@ -196,6 +225,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m2Button, (byte) 2), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m2Button);
@@ -207,6 +237,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m3Button, (byte) 3), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m3Button);
@@ -217,7 +248,8 @@ public class GUI {
         m4Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                setValueInButton(clickOnButton(state, logic, m4Button, (byte) 4), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m4Button);
@@ -229,6 +261,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m5Button, (byte) 5), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m5Button);
@@ -240,6 +273,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m6Button, (byte) 6), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m6Button);
@@ -251,6 +285,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m7Button, (byte) 7), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m7Button);
@@ -262,7 +297,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m8Button, (byte) 8), state.getSide());
-                System.out.println(state.getTurnCounter());
+                messageForWinner(logic.getWinner(state.getFieldMap()));
             }
         });
         mGamePanel.add(m8Button);
@@ -285,12 +320,15 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 resetValueInButtons();
                 state.resetFieldMap();
-                state.setStarted(true);
                 if (state.getSide() == "X") {
                     m4Button.setText(state.getSide());
                     m4Button.setEnabled(false);
                     state.setFieldInMap(state.getSide(), (byte) 4);
                     state.incTurnCounter();
+                }
+                System.out.println("BEGIN");
+                for (int i = 0; i < state.getFieldMap().length; i++) {
+                    System.out.println(state.getFieldMap()[i]);
                 }
             }
         });

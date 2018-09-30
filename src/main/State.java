@@ -57,6 +57,8 @@ public class State {
 
     /** Метод, сбрасывающий значения игрового поля */
     public void resetFieldMap() {
-        fieldMap = new String[]{"-", "-", "-", "-", "-", "-", "-", "-", "-"};
+        for (int i = 0; i < fieldMap.length; i++) {
+            fieldMap[i] = "-";
+        }
     }
 }
