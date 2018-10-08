@@ -202,6 +202,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m0Button, (byte) 0), state.getSide());
                 messageForWinner(logic.getWinner(state.getFieldMap()));
+                System.out.println(state.getFieldMap()[0]);
             }
         });
         mGamePanel.add(m0Button);
@@ -298,6 +299,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m8Button, (byte) 8), state.getSide());
                 messageForWinner(logic.getWinner(state.getFieldMap()));
+                System.out.println(state.getFieldMap()[8]);
             }
         });
         mGamePanel.add(m8Button);
