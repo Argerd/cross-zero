@@ -85,20 +85,6 @@ public class Logic {
                     break;
 
                 case 1:
-                    // Обработка ходов, где игрок проигрывает (возможно он еще не полный).
-                    if (fieldMap[0] == "0" && (fieldMap[1] == "0" || fieldMap[3] == "0" || fieldMap[5] == "0"
-                            || fieldMap[7] == "0" || fieldMap[8] == "0")) {
-                        return fieldForNextTurn = 6;
-                    }
-                    // это исправить
-                    if ((fieldMap[1] == "0" || fieldMap[2] == "0" || fieldMap[3] == "0" || fieldMap[6] == "0")
-                        && (fieldMap[1] == "0" || fieldMap[2] == "0" || fieldMap[3] == "0" || fieldMap[6] == "0")) {
-                        return fieldForNextTurn = 8;
-                    }
-                    if (fieldMap[8] == "0" && fieldMap[2] != "0") {
-                        return fieldForNextTurn = 2;
-                    }
-
                     // Обработка ходов, где пользователь начинает идти к победе или блокировать победные ходы пк,
                     // но ему нельзя этого позволить.
                     if ((fieldMap[0] == "0" && fieldMap[6] == "0") || fieldMap[1] == "0" && fieldMap[8] == "0") {
@@ -109,6 +95,32 @@ public class Logic {
                     }
                     if (fieldMap[3].equals("0") && fieldMap[8].equals("0")) {
                         return fieldForNextTurn = 2;
+                    }
+                    if (fieldMap[6].equals("0") && fieldMap[8].equals("0")) {
+                        return fieldForNextTurn = 7;
+                    }
+                    if (fieldMap[8].equals("0") && fieldMap[2].equals("0")) {
+                        return fieldForNextTurn = 5;
+                    }
+                    if (fieldMap[7].equals("0") && fieldMap[2].equals("0")) {
+                        return 3;
+                    }
+                    if (fieldMap[5].equals("0") && fieldMap[0].equals("0")) {
+                        return 7;
+                    }
+
+                    // Обработка ходов, где игрок проигрывает (возможно он еще не полный).
+                    if (fieldMap[0] == "0" && (fieldMap[1] == "0" || fieldMap[3] == "0" || fieldMap[5] == "0"
+                            || fieldMap[7] == "0" || fieldMap[8] == "0")) {
+                        return fieldForNextTurn = 6;
+                    }
+                    // это исправить
+                    if ((fieldMap[1] == "0" || fieldMap[2] == "0" || fieldMap[3] == "0" || fieldMap[6] == "0") &&
+                        fieldMap[8] != "0") {
+                        return fieldForNextTurn = 8;
+                    }
+                    if (fieldMap[8] == "0") {
+                        return fieldForNextTurn = 3;
                     }
             }
         } else {
