@@ -74,20 +74,21 @@ public class Logic {
                     }
                     if (fieldMap[5].equals("0") && fieldMap[0].equals("0")) {
                         return 7;
+                    } else {
+                        // Обработка ходов, где игрок проигрывает (возможно он еще не полный).
+                        if (fieldMap[1].equals("0") && (fieldMap[2].equals("0") || fieldMap[3].equals("0")
+                                || fieldMap[6].equals("0") || fieldMap[7].equals("0") || fieldMap[5].equals("0"))) {
+                            return 8;
+                        }
                     }
-
-                    // Обработка ходов, где игрок проигрывает (возможно он еще не полный).
-                    if (fieldMap[0] == "0" && (fieldMap[1] == "0" || fieldMap[3] == "0" || fieldMap[5] == "0"
-                            || fieldMap[7] == "0" || fieldMap[8] == "0")) {
-                        return fieldForNextTurn = 6;
+                case 2:
+                    if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0")) {
+                        return 7;
                     }
-                    // это исправить
-                    if ((fieldMap[1] == "0" || fieldMap[2] == "0" || fieldMap[3] == "0" || fieldMap[6] == "0") &&
-                        fieldMap[8] != "0") {
-                        return fieldForNextTurn = 8;
-                    }
-                    if (fieldMap[8] == "0") {
-                        return fieldForNextTurn = 3;
+                case 3:
+                    if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0")
+                            && fieldMap[1].equals("0")) {
+                        return 8;
                     }
             }
         } else {

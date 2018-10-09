@@ -10,15 +10,15 @@ public class State {
     /** Переменная-счетчик ходов. */
     private byte turnCounter = -1;
 
-    /** Условие: началась ли игра? */
-    private boolean isStarted = false;
+    /** Условие: закончились ли варианты ходов */
+    private boolean fieldMapIsFull = false;
 
-    public boolean isStarted() {
-        return isStarted;
+    public boolean isFieldMapIsFull() {
+        return fieldMapIsFull;
     }
 
-    public void setStarted(boolean started) {
-        isStarted = started;
+    public void setFieldMapIsFull(boolean fieldMapIsFull) {
+        this.fieldMapIsFull = fieldMapIsFull;
     }
 
     public String getSide() {
