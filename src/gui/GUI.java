@@ -34,9 +34,6 @@ public class GUI {
     private JButton m7Button = new JButton("7");
     private JButton m8Button = new JButton("8");
 
-    private JButton[] mButtons = {m0Button, m1Button, m2Button, m3Button, m4Button,
-            m5Button, m6Button, m7Button, m8Button};
-
     /**
      * Кнопка "Start".
      */
@@ -84,15 +81,23 @@ public class GUI {
     /**
      * Метод, выводящий на экран сообщение о победителе
      *
-     * @param side  сторона победителя
+     * @param side сторона победителя
      */
-    private void messageForWinner(String side, boolean isFull) {
-        if ((side == "0" || side == "X") && !isFull) {
-            enableFalseButtons();
-            JOptionPane.showMessageDialog(null, "Победила сторона: " + side);
+    private void messageForWinner(String side, String[] fieldMap, Logic logic) {
+        byte counter = -1;
+        for (int i = 0; i < fieldMap.length; i++) {
+            if (fieldMap[i] != "-") {
+                counter++;
+            }
         }
-        if (isFull) {
-            JOptionPane.showMessageDialog(null, "Ничья!");
+        if (logic.getWinner(fieldMap) != "Ошибка или нет победы") {
+            JOptionPane.showMessageDialog(null, "Победила сторона: " + logic.getWinner(fieldMap));
+            enableFalseButtons();
+        } else {
+            if (counter == 8) {
+                JOptionPane.showMessageDialog(null, "Ничья!");
+                enableFalseButtons();
+            }
         }
     }
 
@@ -111,7 +116,7 @@ public class GUI {
     }
 
     /**
-     * Метод, устанавливающий значение стороны играющего на кнопку
+     * Метод, устанавливающий значение стороны пк на кнопку
      *
      * @param buttonNumber номер кнопки
      * @param side         сторона
@@ -158,10 +163,13 @@ public class GUI {
     }
 
     /**
-     * Метод, изменяющий игровое поле и кнопку при нажатии на неё
+     * Метод, учитывающий и отмечающий на карте ход игрока, а также возвращает ячейку, куда пк должен сходить
      *
-     * @param state  объект State (состояния)
-     * @param button объект кнопки
+     * @param state        объект состояния: заполняем карту, счетчик ходов++
+     * @param logic        объект логики: вызывается метод для подсчета хода пк
+     * @param button       кнопка, на которую нажали
+     * @param buttonNumber порядковый номер кнопки, на которую нажали
+     * @return порядковый номер ячейки, куда должен сходить компьютер
      */
     public byte clickOnButton(State state, Logic logic, JButton button, byte buttonNumber) {
         state.setFieldInMap(GUI.getSideForButton(state.getSide()), buttonNumber);
@@ -170,7 +178,7 @@ public class GUI {
         byte numberOfFieldInMap = logic.analysisOfTurns(state.getSide(), state.getFieldMap(), state.getTurnCounter());
         state.setFieldInMap(state.getSide(), numberOfFieldInMap);
         state.incTurnCounter();
-        messageForWinner(logic.getWinner(state.getFieldMap()), state.isFieldMapIsFull());
+        messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
         return numberOfFieldInMap;
     }
 
@@ -205,7 +213,6 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m0Button, (byte) 0), state.getSide());
-
             }
         });
         mGamePanel.add(m0Button);

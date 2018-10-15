@@ -24,30 +24,29 @@ public class Logic {
      * @return номер поля, куда нужно совершить ход для ПК.
      */
     public byte analysisOfTurns(String side, String[] fieldMap, byte turnCounter) {
-        byte fieldForNextTurn = -1;
         if (side == "X") {
             switch (turnCounter) {
                 case 0:
                     if (fieldMap[0] == "0") {
-                        return fieldForNextTurn = 2;
+                        return 2;
                     } else {
                         if (fieldMap[1] == "0" || fieldMap[2] == "0") {
-                            return fieldForNextTurn = 0;
+                            return 0;
                         } else {
                             if (fieldMap[3] == "0" || fieldMap[6] == "0") {
-                                return fieldForNextTurn = 0;
+                                return 0;
                             } else {
                                 if (fieldMap[8] == "0") {
-                                    return fieldForNextTurn = 6;
+                                    return 6;
                                 }
                             }
                         }
                     }
                     if (fieldMap[7] == "0") {
-                        return fieldForNextTurn = 6;
+                        return 6;
                     }
                     if (fieldMap[5] == "0") {
-                        return fieldForNextTurn = 8;
+                        return 8;
                     }
                     break;
 
@@ -55,46 +54,102 @@ public class Logic {
                     // Обработка ходов, где пользователь начинает идти к победе или блокировать победные ходы пк,
                     // но ему нельзя этого позволить.
                     if ((fieldMap[0] == "0" && fieldMap[6] == "0") || fieldMap[1] == "0" && fieldMap[8] == "0") {
-                        return fieldForNextTurn = 3;
+                        return 3;
                     }
                     if (fieldMap[2] == "0" && fieldMap[8] == "0") {
-                        return fieldForNextTurn = 5;
+                        return 5;
                     }
                     if (fieldMap[3].equals("0") && fieldMap[8].equals("0")) {
-                        return fieldForNextTurn = 2;
+                        return 2;
                     }
                     if (fieldMap[6].equals("0") && fieldMap[8].equals("0")) {
-                        return fieldForNextTurn = 7;
+                        return 7;
                     }
                     if (fieldMap[8].equals("0") && fieldMap[2].equals("0")) {
-                        return fieldForNextTurn = 5;
+                        return 5;
                     }
                     if (fieldMap[7].equals("0") && fieldMap[2].equals("0")) {
                         return 3;
                     }
                     if (fieldMap[5].equals("0") && fieldMap[0].equals("0")) {
                         return 7;
-                    } else {
-                        // Обработка ходов, где игрок проигрывает (возможно он еще не полный).
-                        if (fieldMap[1].equals("0") && (fieldMap[2].equals("0") || fieldMap[3].equals("0")
-                                || fieldMap[6].equals("0") || fieldMap[7].equals("0") || fieldMap[5].equals("0"))) {
-                            return 8;
+                    }
+
+                case 2:
+                    if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && fieldMap[3].equals("0")) {
+                        System.out.println("80");
+                        return 6;
+                    }
+                    if ((fieldMap[1].equals("0") && fieldMap[8].equals("0")) && (fieldMap[2].equals("0") ||
+                            (fieldMap[5].equals("0") || fieldMap[6].equals("0")) || fieldMap[7].equals("0"))) {
+                        System.out.println("85");
+                        if (fieldMap[5].equals("0")) {
+                            return 6;
+                        } else {
+                            return 5;
                         }
                     }
-                case 2:
-                    if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0")) {
+                    if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && (fieldMap[1].equals("0")
+                            || fieldMap[6].equals("0") || fieldMap[7].equals("0"))) {
+                        System.out.println("94");
+                        System.out.println("2" + fieldMap[2]);
+                        return 3;
+                    }
+                    if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0") &&
+                            fieldMap[2].equals("0")) {
+                        System.out.println("99");
                         return 7;
+                    }
+                    if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0") &&
+                            (fieldMap[6].equals("0") || fieldMap[3].equals("0") || fieldMap[1].equals("0") ||
+                                    fieldMap[2].equals("0"))) {
+                        if (fieldMap[1].equals("0")) {
+                            return 6;
+                        } else {
+                            return 1;
+                        }
+                    }
+                    /**
+                     * здесь ошибка
+                     */
+                    if (fieldMap[3].equals("0") && fieldMap[8].equals("0") && (fieldMap[6].equals("0")
+                            || fieldMap[7].equals("0") || fieldMap[1].equals("0") || fieldMap[5].equals("0"))) {
+                        System.out.println("104");
+                        if (fieldMap[5].equals("-")) {
+                            return 5;
+                        } else {
+                            return 6;
+                        }
                     }
                 case 3:
                     if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0")
                             && fieldMap[1].equals("0")) {
+                        System.out.println("114");
                         return 8;
+                    }
+                    if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && fieldMap[3].equals("0")
+                            && (fieldMap[7].equals("0") || fieldMap[1].equals("0"))) {
+                        System.out.println("119");
+                        if (fieldMap[1].equals("0")) {
+                            return 7;
+                        } else {
+                            return 1;
+                        }
+                    }
+                    if (fieldMap[3].equals("0") && fieldMap[8].equals("0") && fieldMap[6].equals("0") &&
+                            (fieldMap[1].equals("0") || fieldMap[7].equals("0"))) {
+                        System.out.println("128");
+                        if (fieldMap[1].equals("0")) {
+                            return 7;
+                        } else {
+                            return 1;
+                        }
                     }
             }
         } else {
 
         }
-        return fieldForNextTurn;
+        return -1;
     }
 
     /**

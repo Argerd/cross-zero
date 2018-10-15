@@ -1,25 +1,22 @@
 package main;
 
 public class State {
-    /** Сторона, за которую играет пк. */
+    /**
+     * Сторона, за которую играет пк.
+     */
     private String side = "X";
 
-    /** Игровое поле. */
+    /**
+     * Игровое поле.
+     */
     private String[] fieldMap = {"-", "-", "-", "-", "-", "-", "-", "-", "-"};
 
-    /** Переменная-счетчик ходов. */
+    /**
+     * Переменная-счетчик ходов.
+     */
     private byte turnCounter = -1;
 
-    /** Условие: закончились ли варианты ходов */
-    private boolean fieldMapIsFull = false;
-
-    public boolean isFieldMapIsFull() {
-        return fieldMapIsFull;
-    }
-
-    public void setFieldMapIsFull(boolean fieldMapIsFull) {
-        this.fieldMapIsFull = fieldMapIsFull;
-    }
+    private boolean isEnd = false;
 
     public String getSide() {
         return side;
@@ -45,17 +42,27 @@ public class State {
         turnCounter++;
     }
 
+    public boolean isEnd() {
+        return isEnd;
+    }
+
+    public void setEnd(boolean end) {
+        isEnd = end;
+    }
+
     /**
      * Заполнить клетку поля.
      *
-     * @param side  сторона, занявшая клетку.
-     * @param num   номер клетки.
+     * @param side сторона, занявшая клетку.
+     * @param num  номер клетки.
      */
     public void setFieldInMap(String side, byte num) {
         fieldMap[num] = side;
     }
 
-    /** Метод, сбрасывающий значения игрового поля */
+    /**
+     * Метод, сбрасывающий значения игрового поля
+     */
     public void resetFieldMap() {
         for (int i = 0; i < fieldMap.length; i++) {
             fieldMap[i] = "-";
