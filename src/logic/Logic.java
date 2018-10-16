@@ -27,6 +27,7 @@ public class Logic {
         if (side == "X") {
             switch (turnCounter) {
                 case 0:
+                    System.out.println(turnCounter);
                     if (fieldMap[0] == "0") {
                         return 2;
                     } else {
@@ -51,6 +52,7 @@ public class Logic {
                     break;
 
                 case 1:
+                    System.out.println(turnCounter);
                     // Обработка ходов, где пользователь начинает идти к победе или блокировать победные ходы пк,
                     // но ему нельзя этого позволить.
                     if ((fieldMap[0] == "0" && fieldMap[6] == "0") || fieldMap[1] == "0" && fieldMap[8] == "0") {
@@ -76,6 +78,25 @@ public class Logic {
                     }
 
                 case 2:
+                    System.out.println(turnCounter);
+                    if (fieldMap[8].equals("0") && fieldMap[2].equals("0") && fieldMap[6].equals(side)
+                            && fieldMap[5].equals(side) && (fieldMap[0].equals("0") || fieldMap[1].equals("0")
+                            || fieldMap[3].equals("0") || fieldMap[7].equals("0"))) {
+                        if (fieldMap[3] != "0") {
+                            return 3;
+                        } else {
+                            return 7;
+                        }
+                    }
+                    if (fieldMap[7].equals("0") && fieldMap[2].equals("0") && fieldMap[6].equals(side) &&
+                            fieldMap[3].equals(side) && (fieldMap[0].equals("0") || fieldMap[1].equals("0")
+                            || fieldMap[5].equals("0") || fieldMap[8].equals("0"))) {
+                        if (fieldMap[5] != "0") {
+                            return 5;
+                        } else {
+                            return 0;
+                        }
+                    }
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && fieldMap[3].equals("0")) {
                         System.out.println("80");
                         return 6;
@@ -109,9 +130,6 @@ public class Logic {
                             return 1;
                         }
                     }
-                    /**
-                     * здесь ошибка
-                     */
                     if (fieldMap[3].equals("0") && fieldMap[8].equals("0") && (fieldMap[6].equals("0")
                             || fieldMap[7].equals("0") || fieldMap[1].equals("0") || fieldMap[5].equals("0"))) {
                         System.out.println("104");
@@ -121,7 +139,35 @@ public class Logic {
                             return 6;
                         }
                     }
+                    if (fieldMap[5].equals("0") && fieldMap[0].equals("0") && (fieldMap[1].equals("0")
+                            || fieldMap[2].equals("0") || fieldMap[3].equals("0") || fieldMap[6].equals("0"))) {
+                        if (fieldMap[1] != "0") {
+                            return 1;
+                        } else {
+                            if (fieldMap[6] != "0") {
+                                return 6;
+                            }
+                        }
+                    }
                 case 3:
+                    System.out.println(turnCounter);
+                    if (fieldMap[8].equals("0") && fieldMap[2].equals("0") && fieldMap[3].equals("0")
+                            && fieldMap[6].equals(side) && fieldMap[7].equals(side) && fieldMap[5].equals(side)
+                            && (fieldMap[0].equals("0") || fieldMap[1].equals("0"))) {
+                        if (!fieldMap[1].equals("0")) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                    if (fieldMap[6].equals("0") && fieldMap[8].equals("0") && fieldMap[1].equals("0") &&
+                            (fieldMap[3]).equals("0") || fieldMap[2].equals("0")) {
+                        if (fieldMap[3].equals("0")) {
+                            return 2;
+                        } else {
+                            return 3;
+                        }
+                    }
                     if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0")
                             && fieldMap[1].equals("0")) {
                         System.out.println("114");
