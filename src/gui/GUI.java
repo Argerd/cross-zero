@@ -332,6 +332,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 resetValueInButtons();
                 state.resetFieldMap();
+                state.setTurnCounter((byte) -1);
                 if (state.getSide() == "X") {
                     m4Button.setText(state.getSide());
                     m4Button.setEnabled(false);
