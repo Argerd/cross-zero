@@ -23,6 +23,13 @@ public class GUI {
      */
     private JPanel mOptionPanel;
 
+    /**
+     * Текстовое поле, подписывающая кнопки для выбора стороны игрока
+     */
+    private JTextField sideChoose;
+
+    private JRadioButton radioX;
+
     // Игровые кнопки
     private JButton m0Button = new JButton("0");
     private JButton m1Button = new JButton("1");
@@ -90,7 +97,7 @@ public class GUI {
                 counter++;
             }
         }
-        if (logic.getWinner(fieldMap) != "Ошибка или нет победы") {
+        if (!logic.getWinner(fieldMap).equals("Ошибка или нет победы")) {
             JOptionPane.showMessageDialog(null, "Победила сторона: " + logic.getWinner(fieldMap));
             enableFalseButtons();
         } else {
@@ -108,7 +115,7 @@ public class GUI {
      * @return строка-сторона игрока, отоброжаемая на кнопке
      */
     public static String getSideForButton(String side) {
-        if (side == "X") {
+        if (side.equals("X")) {
             return "0";
         } else {
             return "X";
@@ -178,7 +185,6 @@ public class GUI {
         byte numberOfFieldInMap = logic.analysisOfTurns(state.getSide(), state.getFieldMap(), state.getTurnCounter());
         state.setFieldInMap(state.getSide(), numberOfFieldInMap);
         state.incTurnCounter();
-        messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
         return numberOfFieldInMap;
     }
 
@@ -213,6 +219,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m0Button, (byte) 0), state.getSide());
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m0Button);
@@ -224,7 +231,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m1Button, (byte) 1), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m1Button);
@@ -236,7 +243,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m2Button, (byte) 2), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m2Button);
@@ -248,7 +255,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m3Button, (byte) 3), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m3Button);
@@ -260,7 +267,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m4Button, (byte) 4), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m4Button);
@@ -272,7 +279,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m5Button, (byte) 5), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m5Button);
@@ -284,7 +291,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m6Button, (byte) 6), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m6Button);
@@ -296,7 +303,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m7Button, (byte) 7), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
             }
         });
         mGamePanel.add(m7Button);
@@ -308,7 +315,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setValueInButton(clickOnButton(state, logic, m8Button, (byte) 8), state.getSide());
-                //messageForWinner(logic.getWinner(state.getFieldMap()));
+                messageForWinner(logic.getWinner(state.getFieldMap()), state.getFieldMap(), logic);
                 System.out.println(state.getFieldMap()[8]);
             }
         });
@@ -323,6 +330,16 @@ public class GUI {
         mOptionPanel.setLayout(null);
         mWindow.add(mOptionPanel);
 
+        sideChoose = new JTextField("Выбор стороны:", 15);
+        //sideChoose.setLocation(100, 500);
+        sideChoose.setVisible(true);
+        sideChoose.setEnabled(true);
+        mOptionPanel.add(sideChoose);
+
+        radioX = new JRadioButton("X");
+        radioX.setLocation(0, 500);
+        mOptionPanel.add(radioX);
+
         mStartButton = new JButton("Start");
         mStartButton.setSize(200, 200);
         mStartButton.setLocation(0, 0);
@@ -333,6 +350,7 @@ public class GUI {
                 resetValueInButtons();
                 state.resetFieldMap();
                 state.setTurnCounter((byte) -1);
+                System.out.println(state.getSide());
                 if (state.getSide() == "X") {
                     m4Button.setText(state.getSide());
                     m4Button.setEnabled(false);

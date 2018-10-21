@@ -4,7 +4,7 @@ public class State {
     /**
      * Сторона, за которую играет пк.
      */
-    private String side = "X";
+    private String side = "0";
 
     /**
      * Игровое поле.
