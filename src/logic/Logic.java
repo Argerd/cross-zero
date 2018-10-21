@@ -49,36 +49,65 @@ public class Logic {
                     if (fieldMap[5] == "0") {
                         return 8;
                     }
-                    break;
-
                 case 1:
                     System.out.println(turnCounter);
-                    // Обработка ходов, где пользователь начинает идти к победе или блокировать победные ходы пк,
-                    // но ему нельзя этого позволить.
+                    if (fieldMap[0].equals(side) && !fieldMap[8].equals("0")) {
+                        return 8;
+                    }
+                    if (fieldMap[2].equals(side) && !fieldMap[6].equals("0")) {
+                        return 6;
+                    }
+                    if (fieldMap[8].equals(side) && !fieldMap[0].equals("0")) {
+                        return 0;
+                    }
+                    if (fieldMap[6].equals(side) && !fieldMap[2].equals("0")) {
+                        return 2;
+                    }
                     if ((fieldMap[0] == "0" && fieldMap[6] == "0") || fieldMap[1] == "0" && fieldMap[8] == "0") {
+                        System.out.println("59");
                         return 3;
                     }
                     if (fieldMap[2] == "0" && fieldMap[8] == "0") {
+                        System.out.println("63");
                         return 5;
                     }
                     if (fieldMap[3].equals("0") && fieldMap[8].equals("0")) {
+                        System.out.println("67");
                         return 2;
                     }
                     if (fieldMap[6].equals("0") && fieldMap[8].equals("0")) {
+                        System.out.println("71");
                         return 7;
                     }
                     if (fieldMap[8].equals("0") && fieldMap[2].equals("0")) {
+                        System.out.println("75");
                         return 5;
                     }
                     if (fieldMap[7].equals("0") && fieldMap[2].equals("0")) {
+                        System.out.println("79");
                         return 3;
                     }
                     if (fieldMap[5].equals("0") && fieldMap[0].equals("0")) {
+                        System.out.println("83");
                         return 7;
                     }
-
                 case 2:
                     System.out.println(turnCounter);
+                    if (fieldMap[2].equals(side) && fieldMap[3].equals(side) && !fieldMap[5].equals("0")) {
+                        return 5;
+                    }
+                    if (fieldMap[0].equals(side) && fieldMap[3].equals(side) && !fieldMap[6].equals("0")) {
+                        return 6;
+                    }
+                    if (fieldMap[5].equals(side) && !fieldMap[3].equals("0")) {
+                        return 3;
+                    }
+                    if (fieldMap[2].equals(side) && !fieldMap[6].equals("0")) {
+                        return 6;
+                    }
+                    if (fieldMap[7].equals(side) && !fieldMap[1].equals("0")) {
+                        return 1;
+                    }
                     if (fieldMap[8].equals("0") && fieldMap[2].equals("0") && fieldMap[6].equals(side)
                             && fieldMap[5].equals(side) && (fieldMap[0].equals("0") || fieldMap[1].equals("0")
                             || fieldMap[3].equals("0") || fieldMap[7].equals("0"))) {
@@ -105,9 +134,13 @@ public class Logic {
                             (fieldMap[5].equals("0") || fieldMap[6].equals("0")) || fieldMap[7].equals("0"))) {
                         System.out.println("85");
                         if (fieldMap[5].equals("0")) {
+                            System.out.println("6");
                             return 6;
                         } else {
-                            return 5;
+                            if (!fieldMap[5].equals(side)) {
+                                System.out.println("5");
+                                return 5;
+                            }
                         }
                     }
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && (fieldMap[1].equals("0")
@@ -151,17 +184,50 @@ public class Logic {
                     }
                 case 3:
                     System.out.println(turnCounter);
+                    if (fieldMap[0].equals(side) && fieldMap[2].equals("0") && fieldMap[3].equals("0") &&
+                            fieldMap[5].equals(side) && fieldMap[6].equals(side) && fieldMap[8].equals("0")
+                            && (fieldMap[1].equals("0") || fieldMap[7].equals("0"))) {
+                        System.out.println("177");
+                        if (fieldMap[1].equals("0")) {
+                            return 7;
+                        } else {
+                            return 1;
+                        }
+                    }
+                    if (fieldMap[0].equals("0") && fieldMap[1].equals(side) && fieldMap[2].equals(side)
+                            && fieldMap[3].equals(side) && fieldMap[5].equals("0") && fieldMap[6].equals("0")
+                            && (fieldMap[7].equals("0") || fieldMap[8].equals("0"))) {
+                        if (fieldMap[7].equals("0")) {
+                            return 8;
+                        } else {
+                            return 7;
+                        }
+                    }
                     if (fieldMap[8].equals("0") && fieldMap[2].equals("0") && fieldMap[3].equals("0")
                             && fieldMap[6].equals(side) && fieldMap[7].equals(side) && fieldMap[5].equals(side)
                             && (fieldMap[0].equals("0") || fieldMap[1].equals("0"))) {
+                        System.out.println("163");
                         if (!fieldMap[1].equals("0")) {
                             return 1;
                         } else {
                             return 0;
                         }
                     }
+                    if (fieldMap[3].equals("0") && fieldMap[8].equals("0") && fieldMap[5].equals(side)
+                            && fieldMap[2].equals(side) && fieldMap[6].equals("0") && fieldMap[0].equals(side)
+                            && (fieldMap[1].equals("0")
+                            || fieldMap[7].equals("0"))) {
+                        System.out.println("128");
+                        if (!fieldMap[1].equals("0")) {
+                            return 1;
+                        } else {
+                            return 7;
+                        }
+                    }
                     if (fieldMap[6].equals("0") && fieldMap[8].equals("0") && fieldMap[1].equals("0") &&
-                            (fieldMap[3]).equals("0") || fieldMap[2].equals("0")) {
+                            fieldMap[0].equals(side) && fieldMap[5].equals(side) && fieldMap[7].equals(side)
+                            && (fieldMap[3]).equals("0") || fieldMap[2].equals("0")) {
+                        System.out.println("172");
                         if (fieldMap[3].equals("0")) {
                             return 2;
                         } else {
@@ -176,15 +242,6 @@ public class Logic {
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && fieldMap[3].equals("0")
                             && (fieldMap[7].equals("0") || fieldMap[1].equals("0"))) {
                         System.out.println("119");
-                        if (fieldMap[1].equals("0")) {
-                            return 7;
-                        } else {
-                            return 1;
-                        }
-                    }
-                    if (fieldMap[3].equals("0") && fieldMap[8].equals("0") && fieldMap[6].equals("0") &&
-                            (fieldMap[1].equals("0") || fieldMap[7].equals("0"))) {
-                        System.out.println("128");
                         if (fieldMap[1].equals("0")) {
                             return 7;
                         } else {
