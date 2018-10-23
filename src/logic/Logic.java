@@ -13,7 +13,6 @@ public class Logic {
         if (side.equals("X")) {
             switch (turnCounter) {
                 case 0:
-                    System.out.println(turnCounter);
                     if (fieldMap[0].equals("0")) {
                         return 2;
                     } else {
@@ -36,7 +35,6 @@ public class Logic {
                         return 8;
                     }
                 case 1:
-                    System.out.println(turnCounter);
                     if (fieldMap[0].equals(side) && !fieldMap[8].equals("0")) {
                         return 8;
                     }
@@ -51,35 +49,27 @@ public class Logic {
                     }
                     if ((fieldMap[0].equals("0") && fieldMap[6].equals("0")) || fieldMap[1].equals("0")
                             && fieldMap[8].equals("0")) {
-                        System.out.println("59");
                         return 3;
                     }
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0")) {
-                        System.out.println("63");
                         return 5;
                     }
                     if (fieldMap[3].equals("0") && fieldMap[8].equals("0")) {
-                        System.out.println("67");
                         return 2;
                     }
                     if (fieldMap[6].equals("0") && fieldMap[8].equals("0")) {
-                        System.out.println("71");
                         return 7;
                     }
                     if (fieldMap[8].equals("0") && fieldMap[2].equals("0")) {
-                        System.out.println("75");
                         return 5;
                     }
                     if (fieldMap[7].equals("0") && fieldMap[2].equals("0")) {
-                        System.out.println("79");
                         return 3;
                     }
                     if (fieldMap[5].equals("0") && fieldMap[0].equals("0")) {
-                        System.out.println("83");
                         return 7;
                     }
                 case 2:
-                    System.out.println(turnCounter);
                     if (fieldMap[2].equals(side) && fieldMap[3].equals(side) && !fieldMap[5].equals("0")) {
                         return 5;
                     }
@@ -114,31 +104,24 @@ public class Logic {
                         }
                     }
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && fieldMap[3].equals("0")) {
-                        System.out.println("80");
                         return 6;
                     }
                     if ((fieldMap[1].equals("0") && fieldMap[8].equals("0")) && (fieldMap[2].equals("0") ||
                             (fieldMap[5].equals("0") || fieldMap[6].equals("0")) || fieldMap[7].equals("0"))) {
-                        System.out.println("85");
                         if (fieldMap[5].equals("0")) {
-                            System.out.println("6");
                             return 6;
                         } else {
                             if (!fieldMap[5].equals(side)) {
-                                System.out.println("5");
                                 return 5;
                             }
                         }
                     }
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && (fieldMap[1].equals("0")
                             || fieldMap[6].equals("0") || fieldMap[7].equals("0"))) {
-                        System.out.println("94");
-                        System.out.println("2" + fieldMap[2]);
                         return 3;
                     }
                     if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0") &&
                             fieldMap[2].equals("0")) {
-                        System.out.println("99");
                         return 7;
                     }
                     if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0") &&
@@ -152,7 +135,6 @@ public class Logic {
                     }
                     if (fieldMap[3].equals("0") && fieldMap[8].equals("0") && (fieldMap[6].equals("0")
                             || fieldMap[7].equals("0") || fieldMap[1].equals("0") || fieldMap[5].equals("0"))) {
-                        System.out.println("104");
                         if (fieldMap[5].equals("-")) {
                             return 5;
                         } else {
@@ -170,11 +152,9 @@ public class Logic {
                         }
                     }
                 case 3:
-                    System.out.println(turnCounter);
                     if (fieldMap[0].equals(side) && fieldMap[2].equals("0") && fieldMap[3].equals("0") &&
                             fieldMap[5].equals(side) && fieldMap[6].equals(side) && fieldMap[8].equals("0")
                             && (fieldMap[1].equals("0") || fieldMap[7].equals("0"))) {
-                        System.out.println("177");
                         if (fieldMap[1].equals("0")) {
                             return 7;
                         } else {
@@ -184,7 +164,6 @@ public class Logic {
                     if (fieldMap[0].equals("0") && fieldMap[1].equals(side) && fieldMap[2].equals(side)
                             && fieldMap[3].equals(side) && fieldMap[5].equals("0") && fieldMap[6].equals("0")
                             && (fieldMap[7].equals("0") || fieldMap[8].equals("0"))) {
-                        System.out.println("DDFGDF");
                         if (fieldMap[7].equals("0")) {
                             return 8;
                         } else {
@@ -194,7 +173,6 @@ public class Logic {
                     if (fieldMap[8].equals("0") && fieldMap[2].equals("0") && fieldMap[3].equals("0")
                             && fieldMap[6].equals(side) && fieldMap[7].equals(side) && fieldMap[5].equals(side)
                             && (fieldMap[0].equals("0") || fieldMap[1].equals("0"))) {
-                        System.out.println("163");
                         if (!fieldMap[1].equals("0")) {
                             return 1;
                         } else {
@@ -205,7 +183,6 @@ public class Logic {
                             && fieldMap[2].equals(side) && fieldMap[6].equals("0") && fieldMap[0].equals(side)
                             && (fieldMap[1].equals("0")
                             || fieldMap[7].equals("0"))) {
-                        System.out.println("128");
                         if (!fieldMap[1].equals("0")) {
                             return 1;
                         } else {
@@ -215,7 +192,6 @@ public class Logic {
                     if (fieldMap[6].equals("0") && fieldMap[8].equals("0") && fieldMap[1].equals("0") &&
                             fieldMap[0].equals(side) && fieldMap[5].equals(side) && fieldMap[7].equals(side)
                             && (fieldMap[3]).equals("0") || fieldMap[2].equals("0")) {
-                        System.out.println("172");
                         if (fieldMap[3].equals("0")) {
                             return 2;
                         } else {
@@ -224,12 +200,10 @@ public class Logic {
                     }
                     if (fieldMap[0].equals("0") && fieldMap[6].equals("0") && fieldMap[5].equals("0")
                             && fieldMap[1].equals("0")) {
-                        System.out.println("114");
                         return 8;
                     }
                     if (fieldMap[2].equals("0") && fieldMap[8].equals("0") && fieldMap[3].equals("0")
                             && (fieldMap[7].equals("0") || fieldMap[1].equals("0"))) {
-                        System.out.println("119");
                         if (fieldMap[1].equals("0")) {
                             return 7;
                         } else {
@@ -240,14 +214,12 @@ public class Logic {
         } else {
             switch (turnCounter) {
                 case -1:
-                    System.out.println(turnCounter);
                     if (!fieldMap[4].equals("X")) {
                         return 4;
                     } else {
                         return 0;
                     }
                 case 0:
-                    System.out.println(turnCounter);
                     if (fieldMap[4].equals("X") && (fieldMap[1].equals("X") || fieldMap[3].equals("X")
                             || fieldMap[5].equals("X") || fieldMap[7].equals("X"))) {
                         if (fieldMap[1].equals("X")) {
@@ -265,7 +237,6 @@ public class Logic {
                     }
                     if (fieldMap[4].equals("X") && (fieldMap[2].equals("X") || fieldMap[6].equals("X")
                             || fieldMap[8].equals("X"))) {
-                        System.out.println("SFSDfdsg");
                         if (fieldMap[2].equals("X")) {
                             return 6;
                         }
@@ -274,28 +245,22 @@ public class Logic {
                         }
                     }
                     if (fieldMap[0].equals("X") && (fieldMap[6].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("251");
                         return 3;
                     }
                     if (fieldMap[0].equals("X") && (fieldMap[3].equals("X") || fieldMap[7].equals("X"))) {
-                        System.out.println("255");
                         return 6;
                     }
                     if (fieldMap[0].equals("X") && (fieldMap[1].equals("X")
                             || fieldMap[5].equals("X"))) {
-                        System.out.println("260");
                         return 2;
                     }
                     if (fieldMap[0].equals("X") && fieldMap[2].equals("X")) {
-                        System.out.println("264");
                         return 1;
                     }
                 case 1:
-                    System.out.println(turnCounter);
                     if (fieldMap[4].equals("X") && fieldMap[5].equals("X") && fieldMap[0].equals(side)
                             && fieldMap[3].equals(side) && (fieldMap[1].equals("X") || fieldMap[2].equals("X")
                             || fieldMap[6].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("mint");
                         if (fieldMap[6].equals("X")) {
                             return 2;
                         } else {
@@ -305,7 +270,6 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[3].equals("X") && fieldMap[0].equals(side)
                             && fieldMap[5].equals(side) && (fieldMap[1].equals("X") || fieldMap[2].equals("X")
                             || fieldMap[6].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("mfkbmkfl");
                         if (fieldMap[1].equals("X")) {
                             return 7;
                         }
@@ -322,7 +286,13 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[1].equals("X") && (fieldMap[2].equals("X")
                             || fieldMap[3].equals("X") || fieldMap[5].equals("X") || fieldMap[6].equals("X")
                             || fieldMap[8].equals("X"))) {
-                        System.out.println("dura");
+                        if (fieldMap[2].equals("X")) {
+                            return 6;
+                        }
+                        if (fieldMap[1].equals("X")) {
+                            return 3;
+                        }
+
                         if (fieldMap[5].equals("X")) {
                             return 3;
                         }
@@ -339,7 +309,6 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[8].equals("X") && (fieldMap[1].equals("X")
                             || fieldMap[3].equals("X") || fieldMap[5].equals("X") || fieldMap[6].equals("X")
                             || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("fbvfdb");
                         if (fieldMap[1].equals("X")) {
                             return 7;
                         } else {
@@ -349,7 +318,6 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[2].equals("X") && fieldMap[6].equals(side)
                             && fieldMap[1].equals("X") || fieldMap[3].equals("X") || fieldMap[5].equals("X")
                             || fieldMap[7].equals("X") || fieldMap[8].equals("X")) {
-                        System.out.println("GGGGGGGGG");
                         if (fieldMap[3].equals("X")) {
                             return 5;
                         } else {
@@ -363,7 +331,6 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[6].equals("X") && (fieldMap[1].equals("X")
                             || fieldMap[3].equals("X") || fieldMap[5].equals("X") || fieldMap[7].equals("X")
                             || fieldMap[8].equals("X"))) {
-                        System.out.println("bmdbbmgkmb");
                         if (fieldMap[1].equals("X")) {
                             return 7;
                         } else {
@@ -373,7 +340,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[8].equals("X") && fieldMap[3].equals(side)
                             && (fieldMap[1].equals("X") || fieldMap[2].equals("X") || fieldMap[5].equals("X")
                             || (fieldMap[6].equals("X") || fieldMap[7].equals("X")))) {
-                        System.out.println("Dfr");
                         if (fieldMap[5].equals("X")) {
                             return 2;
                         } else {
@@ -384,7 +350,6 @@ public class Logic {
                             && fieldMap[3].equals(side) && (fieldMap[1].equals("X")
                             || fieldMap[2].equals("X") || fieldMap[3].equals("X") || fieldMap[5].equals("X")
                             || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("270");
                         if (fieldMap[5].equals("X")) {
                             return 1;
                         } else {
@@ -394,7 +359,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[4].equals(side) && fieldMap[5].equals("X")
                             && fieldMap[2].equals(side) && (fieldMap[1].equals("X") || fieldMap[3].equals("X")
                             || fieldMap[6].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("271");
                         if (!fieldMap[6].equals("X")) {
                             return 6;
                         } else {
@@ -404,7 +368,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[4].equals(side) && fieldMap[6].equals(side)
                             && (fieldMap[1].equals("X") || fieldMap[2].equals("X") || fieldMap[5].equals("X")
                             || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("272");
                         if (!fieldMap[2].equals("X")) {
                             return 2;
                         } else {
@@ -414,7 +377,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[1].equals("X") && (fieldMap[3].equals("X")
                             || fieldMap[5].equals("X") || fieldMap[6].equals("X") || fieldMap[7].equals("X")
                             || fieldMap[8].equals("X"))) {
-                        System.out.println("273");
                         if (!fieldMap[6].equals("X")) {
                             return 6;
                         } else {
@@ -424,7 +386,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[2].equals("X") && (fieldMap[3].equals("X")
                             || fieldMap[5].equals("X") || fieldMap[6].equals("X") || fieldMap[7].equals("X")
                             || fieldMap[8].equals("X"))) {
-                        System.out.println("282");
                         if (!fieldMap[7].equals("X")) {
                             return 7;
                         } else {
@@ -432,11 +393,9 @@ public class Logic {
                         }
                     }
                 case 2:
-                    System.out.println(turnCounter);
                     if (fieldMap[4].equals("X") && fieldMap[2].equals("X") && fieldMap[7].equals("X")
                             && fieldMap[1].equals(side) && fieldMap[6].equals(side) && (fieldMap[3].equals("X")
                             || fieldMap[5].equals("X") ||fieldMap[8].equals("X"))) {
-                        System.out.println("JJJJJJJ");
                         if (fieldMap[3].equals("X")) {
                             return 8;
                         } else {
@@ -446,25 +405,15 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[5].equals("X") && fieldMap[6].equals("X")
                             && fieldMap[0].equals(side) && fieldMap[2].equals(side) && fieldMap[3].equals(side)
                             && (fieldMap[1].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("Xggf");
                         if (fieldMap[1].equals("X")) {
                             return 7;
                         } else {
                             return 1;
                         }
                     }
-                    if (fieldMap[4].equals("X") && fieldMap[3].equals("X") && fieldMap[7].equals("X")
-                            && (fieldMap[2].equals("X") || fieldMap[6].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("fmbklnblkrb");
-                        if (fieldMap[2].equals("X")) {
-                            return 6;
-                        } else {
-                            return 2;
-                        }
-                    }
+
                     if (fieldMap[4].equals("X") && fieldMap[3].equals("X") && fieldMap[8].equals("X")
                             && (fieldMap[2].equals("X") || fieldMap[6].equals("X") || fieldMap[7].equals("X"))) {
-                        System.out.println("POOP");
                         if (fieldMap[2].equals("X")) {
                             return 6;
                         } else {
@@ -473,7 +422,12 @@ public class Logic {
                     }
                     if (fieldMap[4].equals("X") && fieldMap[3].equals("X") && fieldMap[6].equals("X")
                             && (fieldMap[1].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("frjkrg");
+                        if (fieldMap[5].equals("X")) {
+                            return 3;
+                        }
+                        if (fieldMap[3].equals("X")) {
+                            return 5;
+                        }
                         if (fieldMap[1].equals("X")) {
                             return 8;
                         } else {
@@ -483,7 +437,6 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[1].equals("X") && fieldMap[3].equals("X")
                             && fieldMap[0].equals(side) && fieldMap[5].equals(side) && fieldMap[7].equals(side)
                             && (fieldMap[2].equals("X") || fieldMap[6].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("gklfkglf");
                         if (fieldMap[2].equals("X")) {
                             return 6;
                         }
@@ -494,7 +447,6 @@ public class Logic {
                     if (fieldMap[4].equals("X") && fieldMap[0].equals(side) && fieldMap[5].equals("X")
                             && fieldMap[1].equals("X") && fieldMap[3].equals(side) && fieldMap[7].equals(side)
                             && (fieldMap[6].equals("X") || fieldMap[2].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("sobaka");
                         if (fieldMap[2].equals("X")) {
                             return 6;
                         }
@@ -504,25 +456,15 @@ public class Logic {
                     }
                     if (fieldMap[4].equals("X") && fieldMap[8].equals("X") && fieldMap[1].equals("X")
                             && (fieldMap[3].equals("X") || fieldMap[5].equals("X") || fieldMap[6].equals("X"))) {
-                        System.out.println("kira");
                         if (fieldMap[3].equals("X")) {
                             return 5;
                         } else {
                             return 3;
                         }
                     }
-                    if (fieldMap[4].equals("X") && fieldMap[2].equals("X") && fieldMap[3].equals("X")
-                            && (fieldMap[1].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("g,rgrg");
-                        if (fieldMap[7].equals("X")) {
-                            return 1;
-                        } else {
-                            return 7;
-                        }
-                    }
+
                     if (fieldMap[4].equals("X") && fieldMap[6].equals("X") && fieldMap[1].equals("X")
                             && (fieldMap[3].equals("X") || fieldMap[5].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("kek");
                         if (fieldMap[3].equals("X")) {
                             return 5;
                         } else {
@@ -532,7 +474,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[1].equals("X") && fieldMap[6].equals("X")
                             && fieldMap[2].equals(side) && (fieldMap[5].equals("X") || fieldMap[7].equals("X")
                             || fieldMap[8].equals("X"))) {
-                        System.out.println("283");
                         if (!fieldMap[5].equals("X")) {
                             return 5;
                         } else {
@@ -542,7 +483,6 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[3].equals(side) && fieldMap[5].equals("X")
                             && fieldMap[2].equals(side) && (fieldMap[1].equals("X") || fieldMap[6].equals("X")
                             || fieldMap[7].equals("X"))) {
-                        System.out.println("ttttttttt");
                         if (!fieldMap[2].equals("X")) {
                             return 1;
                         } else {
@@ -551,7 +491,6 @@ public class Logic {
                     }
                     if (fieldMap[0].equals("X") && fieldMap[6].equals("X") && fieldMap[5].equals("X")
                             && (fieldMap[2].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("DD");
                         if (fieldMap[7].equals("X")) {
                             return 8;
                         } else {
@@ -561,12 +500,10 @@ public class Logic {
                     if (fieldMap[0].equals("X") && fieldMap[1].equals(side) && fieldMap[2].equals("X")
                             && fieldMap[3].equals("X") && fieldMap[4].equals(side) && fieldMap[6].equals(side)
                             && (fieldMap[5].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("304");
                         return 7;
                     }
                     if (fieldMap[0].equals("X") && fieldMap[2].equals("X") && fieldMap[7].equals("X")
                             && (fieldMap[3].equals("X") || fieldMap[5].equals("X") || fieldMap[8].equals("X"))) {
-                        System.out.println("302");
                         if (fieldMap[5].equals("X")) {
                             return 8;
                         }
@@ -574,9 +511,29 @@ public class Logic {
                             return 5;
                         }
                     }
+                    if (fieldMap[4].equals("X") && fieldMap[3].equals("X") && fieldMap[7].equals("X")
+                            && (fieldMap[2].equals("X") || fieldMap[6].equals("X") || fieldMap[8].equals("X"))) {
+                        if (fieldMap[2].equals("X")) {
+                            return 6;
+                        } else {
+                            return 2;
+                        }
+                    }
+                    if (fieldMap[4].equals("X") && fieldMap[2].equals("X") && fieldMap[3].equals("X")
+                            && (fieldMap[1].equals("X") || fieldMap[7].equals("X") || fieldMap[8].equals("X"))) {
+                        if (fieldMap[5].equals("X")) {
+                            return 3;
+                        }
+                        if (fieldMap[3].equals("X")) {
+                            return 5;
+                        }
+                        if (fieldMap[7].equals("X")) {
+                            return 1;
+                        } else {
+                            return 7;
+                        }
+                    }
                 case 3:
-                    // Здесь уже ничья 100%
-                    System.out.println(turnCounter);
                     for (byte i = 0; i < fieldMap.length; i++) {
                         if (fieldMap[i].equals(side)) {
                             return i;
